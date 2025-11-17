@@ -1,0 +1,21 @@
+
+CalculationResponse:
+  type: object
+  properties:
+    result:
+      type: number
+      example: 8
+
+ErrorResponse:
+  type: object
+  properties:
+    error:
+      type: string
+      example: "Invalid input"
+
+ErrorResponseServer:
+  type: object
+  properties:
+    error:
+      type: string
+      example: "Server error"
