@@ -4,6 +4,12 @@ info:
   version: 1.0.0
   description: Miniräknar API
 
+servers:
+  - url: https://api.example.com     
+    description: Production server
+  - url: http://localhost:5000        
+    description: Local development server
+
 paths:
   /calculate:
     post:
@@ -13,25 +19,70 @@ paths:
         content:
           application/json:
             schema:
-              $ref: './model.yaml#/CalculationRequest'
+              $ref: '#/components/schemas/CalculationRequest'
       responses:
         '200':
           description: Calculation result
           content:
             application/json:
               schema:
-                $ref: './response.yaml#/CalculationResponse'
-                example:
-                  result: 8
+                $ref: '#/components/schemas/CalculationResponse'
+              example:
+                result: 8
         '400':
           description: Invalid input
           content:
             application/json:
               schema:
-                $ref: './response.yaml#/ErrorResponse'
+                $ref: '#/components/schemas/ErrorResponse'
         '500':
           description: Server error
           content:
             application/json:
               schema:
-                $ref: './response.yaml#/ErrorResponseServer'
+                $ref: '#/components/schemas/ErrorResponseServer'
+
+components:
+  schemas:
+    CalculationRequest:
+      type: object
+      required:
+        - a
+        - b
+        - operation
+      properties:
+        a:
+          type: number
+          example: 5
+          description: First operand
+        b:
+          type: number
+          example: 3
+          description: Second operand
+        operation:
+          type: string
+          enum: ["+", "-", "*", "/"]
+          example: "+"
+          description: Operator
+
+   
+    CalculationResponse:
+      type: object
+      properties:
+        result:
+          type: number
+          example: 8
+
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Invalid input"
+
+    ErrorResponseServer:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Server error"

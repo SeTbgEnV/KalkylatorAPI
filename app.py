@@ -1,14 +1,35 @@
-from app import create_app
-import yaml
-from flask import jsonify
+from flask import Flask, request, jsonify
 
-app = create_app()
+app = Flask(__name__)
 
-with open("contract/calculator-openapi.yaml") as f:
-    openapi_spec = yaml.safe_load(f)
+@app.route("/calculate", methods=["POST"])
+def calculate():
+    data = request.get_json()
 
-    @app.route("/openapi")
-    def openapi():
-     return jsonify(openapi_spec)
-    
-app.run(debug=True)
+    # Extract input values
+    a = data.get("a")
+    b = data.get("b")
+    operation = data.get("operation")
+
+    # Validate input
+    if a is None or b is None or operation not in ["+", "-", "*", "/"]:
+        return jsonify({"message": "Invalid input"}), 400
+
+    # Perform calculation
+    if operation == "+":
+        result = a + b
+    elif operation == "-":
+        result = a - b
+    elif operation == "*":
+        result = a * b
+    elif operation == "/":
+        if b == 0:
+            return jsonify({"message": "Division by zero"}), 400
+        result = a / b
+
+    # Return result
+    return jsonify({"result": result}), 200
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

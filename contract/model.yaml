@@ -1,9 +1,3 @@
-CalculationRequest:
-  type: object
-  required:
-    - a
-    - b
-    - operation
   properties:
     a:
       type: number
