@@ -1,4 +1,12 @@
 def calculate(a: float, b: float, operator: str) -> dict:
+    """
+        Performs a calculation based on the given operator.
+        
+        @param a: First number
+        @param b: Second number
+        @param operator: A string representing the operation ("+", "-", "*", "/")
+        @return: A dictionary with the result and the expression as a string
+    """
     if operator == "+":
         result = a + b
     elif operator == "-":
