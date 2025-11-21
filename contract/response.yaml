@@ -5,6 +5,9 @@ CalculationResponse:
     result:
       type: number
       example: 8
+      expression:
+       type: string
+       example: "3 + 5" 
 
 ErrorResponse:
   type: object

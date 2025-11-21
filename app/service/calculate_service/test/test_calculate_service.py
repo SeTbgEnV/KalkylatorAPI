@@ -2,11 +2,10 @@ import pytest
 from app.service.calculate_service.calculate_service import calculate
 import app.service.calculate_service.test.mock as mock
 
+"""correct error test example"""
 def test_fail_calculate():
     with pytest.raises(TypeError):
-        calculate(mock.num12, mock.num2, "+")
-
-# --- IGNORE --- ^
+        calculate(mock.num12, mock.num13, "+")
 
 def test_calculate():
     """Test the calculate function with various operations and edge cases."""

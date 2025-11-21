@@ -23,5 +23,5 @@ result_invalid_operator_expression = "2 % 3"
 
 num12 = "hej"
 num13 = 3
-result_1_2 = 5
-result_1_2_expression = "2 + 3"
+result = "Invalid input"
+result_12_13_expression = "hej + 3"
