@@ -71,23 +71,23 @@ components:
           description: Operator
 
    
-    # CalculationResponse:
-    #   type: object
-    #   properties:
-    #     result:
-    #       type: number
-    #       example: 8
+    CalculationResponse:
+      type: object
+      properties:
+        result:
+          type: number
+          example: 8
 
-    # ErrorResponse:
-    #   type: object
-    #   properties:
-    #     message:
-    #       type: string
-    #       example: "Invalid input"
+    ErrorResponse:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Invalid input"
 
-    # ErrorResponseServer:
-    #   type: object
-    #   properties:
-    #     message:
-    #       type: string
-    #       example: "Server error"
+    ErrorResponseServer:
+      type: object
+      properties:
+        message:
+          type: string
+          example: "Server error"

@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
+from app.service.calculate_service.calculate_service import calculate
 
 app = Flask(__name__)
 
 @app.route("/calculate", methods=["POST"])
-def calculate():
+def calculate_endpoint():
     data = request.get_json()
 
     # Extract input values
@@ -11,26 +12,15 @@ def calculate():
     b = data.get("b")
     operation = data.get("operation")
 
-    # Validate input
-    if a is None or b is None or operation not in ["+", "-", "*", "/"]:
-        return jsonify({"message": "Invalid input"}), 400
-
-    # # Perform calculation
-    # if operation == "+":
-    #     result = a + b
-    # elif operation == "-":
-    #     result = a - b
-    # elif operation == "*":
-    #     result = a * b
-    # elif operation == "/":
-    #     if b == 0:
-    #         return jsonify({"message": "Division by zero"}), 400
-    #     result = a / b
-
-    # detta ska ändras till serviceanrop
-
-    # Return result
-    return jsonify({"result": result}), 200
+    try:
+        result = calculate(a, b, operation)
+        return jsonify(result), 200
+    except ZeroDivisionError as e:
+        return jsonify({"error": str(e)}), 400
+    except ValueError as e:
+        return jsonify({"error": str(e)}), 400
+    except Exception as e:
+        return jsonify({"error": "Server error"}), 500
 
 
 if __name__ == "__main__":
